@@ -10,11 +10,12 @@ class CharacterController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     *
      */
     public function index()
     {
-        //
+        $characters = Character::all();
+        return view("characters.index", compact("characters"));
     }
 
     /**
