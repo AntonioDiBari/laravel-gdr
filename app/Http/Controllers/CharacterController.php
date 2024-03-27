@@ -49,22 +49,21 @@ class CharacterController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Character  $character
-     * @return \Illuminate\Http\Response
      */
     public function show(Character $character)
     {
-        //
+        return view('characters.show', compact('character'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Character  $character
-     * @return \Illuminate\Http\Response
+     *
      */
     public function edit(Character $character)
     {
-        //
+        return view('characters.edit', compact('character'));
     }
 
     /**
@@ -76,7 +75,11 @@ class CharacterController extends Controller
      */
     public function update(Request $request, Character $character)
     {
-        //
+        $data = $request->all();
+
+        $character->update($data);
+
+        return redirect()->route('characters.index');
     }
 
     /**
