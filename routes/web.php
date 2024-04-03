@@ -1,9 +1,13 @@
 <?php
 
-use App\Http\Controllers\CharacterController;
-use App\Http\Controllers\ItemController;
-use App\Models\Character;
+use App\Http\Controllers\Guest\DashboardController as GuestDashboardController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ItemController;
+use App\Http\Controllers\Admin\CharacterController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -11,11 +15,29 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
 |
 */
 
-Route::get('/', [ItemController::class, 'index'])->name('home');
+// # Rotte pubbliche
+Route::get('/', [GuestDashboardController::class, 'index'])
+    ->name('home');
 
-Route::resource('characters', CharacterController::class);
+// # Rotte protette
+
+Route::middleware('auth')
+    ->prefix('/admin')
+    ->name('admin.')
+    ->group(function () {
+
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+            ->name('dashboard');
+
+        Route::get('/items', [ItemController::class, 'index'])->name('items');
+        Route::resource('characters', CharacterController::class);
+
+    });
+
+
+require __DIR__ . '/auth.php';
