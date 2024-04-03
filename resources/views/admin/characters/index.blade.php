@@ -5,7 +5,7 @@
 @section('main-content')
     <section>
         <div class="container py-4">
-            <a href="{{ route('characters.create') }}" class="btn btn-primary">Aggiungi Personaggio</a>
+            <a href="{{ route('admin.characters.create') }}" class="btn btn-primary">Aggiungi Personaggio</a>
             <table class="table">
 
                 <thead>
@@ -34,10 +34,10 @@
                             <td>{{ $character->life }}</td>
                             <td>{{ $character->speed }}</td>
                             <td class="d-flex align-items-center gap-2">
-                                <a href="{{ route('characters.edit', $character) }}">
+                                <a href="{{ route('admin.characters.edit', $character) }}">
                                     <i class="fa-solid fa-pencil"></i>
                                 </a>
-                                <a href="{{ route('characters.show', $character) }}">
+                                <a href="{{ route('admin.characters.show', $character) }}">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
                                 <button type="button" class="btn btn-link text-danger p-0" data-bs-toggle="modal"
@@ -83,7 +83,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
-                        <form action="{{ route('characters.destroy', $character) }}" method="POST">
+                        <form action="{{ route('admin.characters.destroy', $character) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger">Elimina</button>

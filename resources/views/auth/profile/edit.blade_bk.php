@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('content')
+@section('main-content')
 <!-- Header -->
 <h2 class=" fw-semibold fs-2 text-secondary">
     {{ __('Profile') }}

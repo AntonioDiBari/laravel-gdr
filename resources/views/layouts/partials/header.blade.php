@@ -1,7 +1,7 @@
 <header>
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="#">ProjectsHub</a>
+            <a class="navbar-brand" href="#">Laravel GDR</a>
             <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
                 class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
                 <span class="navbar-toggler-icon"></span>
@@ -15,16 +15,16 @@
                         <li class="nav-item">
                             <a @class([
                                 'nav-link',
-                                'active' => Route::currentRouteName() == 'admin.projects.index',
+                                'active' => Route::currentRouteName() == 'admin.characters.index',
                             ]) aria-current="page"
-                                href="{{ route('admin.projects.index') }}">Characters</a>
+                                href="{{ route('admin.characters.index') }}">Characters</a>
                         </li>
                         <li class="nav-item">
                             <a @class([
                                 'nav-link',
                                 'active' => Route::currentRouteName() == 'admin.projects.index',
                             ]) aria-current="page"
-                                href="{{ route('admin.projects.index') }}">Items</a>
+                                href="{{ route('admin.items.index') }}">Items</a>
                         </li>
                     @endauth
 
@@ -45,7 +45,7 @@
                             </a>
 
                             <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="{{ route('admin.dashboard') }}"> Dashboard</a>
+                                <a class="dropdown-item" href="{{ route('dashboard') }}"> Dashboard</a>
                                 <a class="dropdown-item" href="{{ url('profile') }}"> Profile</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" id="logout-link">
                                     Logout

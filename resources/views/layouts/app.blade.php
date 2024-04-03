@@ -18,7 +18,7 @@
         @include('layouts.partials.header')
 
         <main>
-            @yield('content')
+            @yield('main-content')
         </main>
 
         @include('layouts.partials.footer')
@@ -36,7 +36,7 @@
             });
         </script>
     @endauth
-
+    @yield('modal')
     @yield('js')
 </body>
 

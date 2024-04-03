@@ -7,7 +7,7 @@
     <div class="container">
         
         <h1>Aggiungi Personaggio</h1>
-        <form action="{{ route('characters.store')}}" method="POST" class='row'>
+        <form action="{{ route('admin.characters.store')}}" method="POST" class='row'>
         @csrf
         <div class="mb-3 col-3">
             <label for="name" class="form-label">Name</label>

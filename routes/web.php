@@ -31,13 +31,16 @@ Route::middleware('auth')
     ->name('admin.')
     ->group(function () {
 
-        Route::get('/dashboard', [AdminDashboardController::class, 'index'])
-            ->name('dashboard');
-
-        Route::get('/items', [ItemController::class, 'index'])->name('items');
+        
+        Route::resource('items', ItemController::class);
         Route::resource('characters', CharacterController::class);
-
+        
     });
-
+    Route::middleware('auth')
+    ->group(function () {
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+        ->name('dashboard');
+    });
+    
 
 require __DIR__ . '/auth.php';

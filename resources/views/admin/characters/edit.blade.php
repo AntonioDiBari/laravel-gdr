@@ -7,7 +7,7 @@
     <div class="container">
         
         <h1>Modifica Personaggio</h1>
-        <form action="{{ route('characters.update', $character)}}" method="POST" class='row'>
+        <form action="{{ route('admin.characters.update', $character)}}" method="POST" class='row'>
         @csrf
         @method('PATCH')
         <div class="mb-3 col-3">
