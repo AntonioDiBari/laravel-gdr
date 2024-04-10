@@ -21,9 +21,10 @@ class CharacterItemSeeder extends Seeder
         $items = Item::all()->pluck('id');
 
 
-        foreach($characters as $character){
-            $character->items()->syncWithPivotValues( $faker->randomElements($items, 1), ['quantity'=>$faker->randomElement()]);
-            
-        };
+        foreach ($characters as $character) {
+            $character->items()->syncWithPivotValues($faker->randomElements($items, 1), ['quantity' => rand(1, 3)]);
+
+        }
+        ;
     }
 }

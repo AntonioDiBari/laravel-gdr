@@ -1,56 +1,56 @@
 @extends('layouts.app')
 
-@section('title', 'Personaggi')
+@section('title', 'Tipi')
 
 @section('main-content')
     <section>
         <div class="container py-4">
-            <a href="{{ route('admin.characters.create') }}" class="btn btn-primary">Aggiungi Personaggio</a>
+            <a href="{{ route('admin.types.create') }}" class="btn btn-primary">Aggiungi Personaggio</a>
             <table class="table">
 
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
-                        <th>Tipo</th>
-                        <th>Description</th>
-                        <th>Attack</th>
-                        <th>Defence</th>
-                        <th>Life</th>
-                        <th>Speed</th>
+                        <th>Slug</th>
+                        <th>Image</th>
                         <th></th>
                         <th></th>
-
+                        <th></th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @forelse ($characters as $character)
+                    @forelse ($types as $type)
                         <tr>
-                            <td>{{ $character->id }}</td>
-                            <td>{{ $character->name }}</td>
-                            <td>{{ $character->type->name }}</td>
-                            <td>{{ $character->description }}</td>
-                            <td>{{ $character->attack }}</td>
-                            <td>{{ $character->defence }}</td>
-                            <td>{{ $character->life }}</td>
-                            <td>{{ $character->speed }}</td>
-                            <td class="d-flex align-items-center gap-2">
-                                <a href="{{ route('admin.characters.edit', $character) }}">
+                            <td>{{ $type->id }}</td>
+                            <td>{{ $type->name }}</td>
+                            <td>{{ $type->slug }}</td>
+                            <td>
+                                <div class="gif">
+                                    <img src="{{ asset($type->image) }}" width="100%">
+                                </div>
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.types.edit', $type) }}">
                                     <i class="fa-solid fa-pencil"></i>
                                 </a>
-                                <a href="{{ route('admin.characters.show', $character) }}">
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.types.show', $type) }}">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
+                            </td>
+                            <td>
                                 <button type="button" class="btn btn-link text-danger p-0" data-bs-toggle="modal"
-                                    data-bs-target="#delete-{{ $character->id }}-character">
+                                    data-bs-target="#delete-{{ $type->id }}-type">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td>no items</td>
+                            <td>no type</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -69,23 +69,23 @@
 @endsection
 
 @section('modal')
-    @foreach ($characters as $character)
-        <div class="modal fade" id="delete-{{ $character->id }}-character" tabindex="-1"
-            aria-labelledby="delete-{{ $character->id }}-character" aria-hidden="true">
+    @foreach ($types as $type)
+        <div class="modal fade" id="delete-{{ $type->id }}-type" tabindex="-1"
+            aria-labelledby="delete-{{ $type->id }}-type" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="delete-{{ $character->id }}-character">
-                            Eliminare {{ $character->name }} ?</h1>
+                        <h1 class="modal-title fs-5" id="delete-{{ $type->id }}-type">
+                            Eliminare {{ $type->name }} ?</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Se elimini non si potrà tornare indietro.
+                        Se elimini il tipo eliminerai i personaggi di questo tipo. Confermi ?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
-                        <form action="{{ route('admin.characters.destroy', $character) }}" method="POST">
+                        <form action="{{ route('admin.types.destroy', $type) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger">Elimina</button>

@@ -6,8 +6,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ItemController;
 use App\Http\Controllers\Admin\CharacterController;
-
-
+use App\Http\Controllers\Admin\TypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,16 +30,17 @@ Route::middleware('auth')
     ->name('admin.')
     ->group(function () {
 
-        
+
         Route::resource('items', ItemController::class);
         Route::resource('characters', CharacterController::class);
-        
+        Route::resource('types', TypeController::class);
+
     });
-    Route::middleware('auth')
+Route::middleware('auth')
     ->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])
-        ->name('dashboard');
+            ->name('dashboard');
     });
-    
+
 
 require __DIR__ . '/auth.php';
