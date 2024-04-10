@@ -15,13 +15,21 @@ class CharacterSeeder extends Seeder
      */
     public function run()
     {
-        // $character = new Character;
-        // $character->name;
-        // $character->description;
-        // $character->attack;
-        // $character->defence;
-        // $character->speed;
-        // $character->life;
-        // $character->save();
+
+        $characters = config('characters');
+
+        foreach($characters['characters'] as $_character){
+
+            $character = new Character;
+            $character->name = $_character['name'];
+            $character->description = $_character['description'];
+            $character->attack = $_character['strength'];
+            $character->defence = $_character['defence'];
+            $character->speed = $_character['speed'];
+            $character->life = $_character['life'];
+            $character->type_id = $_character['type_id'];
+            $character->save();
+
+        };
     }
 }
