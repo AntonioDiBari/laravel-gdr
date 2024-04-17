@@ -16,4 +16,8 @@ class Character extends Model
     public function items(){
         return $this->belongsToMany(Item::class);
     }
+
+    public function getAbstract($n_char){
+        return (strlen($this->description) > $n_char) ? substr($this->description, 0, $n_char) . '...' : $this->description;
+    }
 }
