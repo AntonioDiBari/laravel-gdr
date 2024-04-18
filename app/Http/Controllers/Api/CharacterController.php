@@ -16,10 +16,11 @@ class CharacterController extends Controller
     public function index()
     {
         $characters = Character::select(['id', 'type_id', 'name', 'description', 'attack', 'defence', 'speed', 'life'])
-            ->with('type:id,name,image', 'items:id,name,category,weight,cost')
-            ->paginate();
+            ->with('type:id,name,image', 'items:id,name,category,weight,cost')->get();
 
         foreach ($characters as $character) {
+        $character->type->image = !empty($character->type->image) ? asset($character->type->image) : null;
+
             $character->description = $character->getAbstract(50);
         }
 
@@ -48,7 +49,7 @@ class CharacterController extends Controller
         $character = Character::select(['id', 'type_id', 'name', 'description', 'attack', 'defence', 'speed', 'life'])
             ->where('id', $id)->with(['type:id,name,image', 'items:id,name,category,weight,cost'])->first();
 
-        $character->type->image = !empty($character->type->image) ? asset('http://127.0.0.1:8000' . $character->type->image) : null;
+        $character->type->image = !empty($character->type->image) ? asset($character->type->image) : null;
         return response()->json($character);
 
     }
